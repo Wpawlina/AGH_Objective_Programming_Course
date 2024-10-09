@@ -1,4 +1,1 @@
-Wojciech Pawlina 
-gr 15 pon 16 45
-Betoniarz
-https://gitexercises.fracz.com/committer/f1b9ec3c264589886c881f3278c6b6574437c3a8?fbclid=IwY2xjawFxvpNleHRuA2FlbQIxMAABHa2M95GH9qVqJOP1Za63x01M8VhyJOZw39njcrTVX1vmC98gUzAAMJwVOg_aem_RJxiVkxaXZoNk-PzS-nj6Q
+# PO_2024_PN1645_PAWLINA
