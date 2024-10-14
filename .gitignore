@@ -9,7 +9,8 @@
 .idea/**/shelf
 .idea/
 
-# AWS User-specifics
+
+# AWS User-specific
 .idea/**/aws.xml
 
 # Generated files
@@ -78,3 +79,4 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 lab0/
+
