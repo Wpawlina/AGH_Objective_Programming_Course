@@ -16,7 +16,7 @@ public class Vector2d {
         return this.y;
     }
     public String toString() {
-        return "(" + this.x + ", " + this.y + ")";
+        return "(" + this.x + "," + this.y + ")";
     }
     public boolean precedes(Vector2d vector) {
         return this.x <= vector.getX() && this.y <= vector.getY();

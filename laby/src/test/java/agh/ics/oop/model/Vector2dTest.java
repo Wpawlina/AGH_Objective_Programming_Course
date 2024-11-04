@@ -32,7 +32,7 @@ public class Vector2dTest {
     public void toStringVector() {
         Vector2d v1 = new Vector2d(1, 2);
 
-        assertEquals("(1, 2)", v1.toString());
+        assertEquals("(1,2)", v1.toString());
     }
 
     @Test
