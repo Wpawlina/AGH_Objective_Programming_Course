@@ -12,7 +12,7 @@ public class Animal {
     }
 
     public  Animal(Vector2d initialPosition){
-        if (initialPosition.getX() < 0 || initialPosition.getX() > 4 || initialPosition.getY() < 0 || initialPosition.getY() > 4)
+        if(!canMoveThere(initialPosition))
         {
             throw new IllegalArgumentException("Animal position is out of the map");
         }
@@ -35,19 +35,23 @@ public class Animal {
             case LEFT -> this.direction = this.direction.previous();
             case FORWARD -> {
                 Vector2d newPosition = this.position.add(this.direction.toUnitVector());
-                if (newPosition.getX() >= 0 && newPosition.getX() <= 4 && newPosition.getY() >= 0 && newPosition.getY() <= 4)
+                if (canMoveThere(newPosition))
                 {
                     this.position = newPosition;
                 }
             }
             case BACKWARD -> {
                 Vector2d newPosition = this.position.subtract(this.direction.toUnitVector());
-                if (newPosition.getX() >= 0 && newPosition.getX() <= 4 && newPosition.getY() >= 0 && newPosition.getY() <= 4)
+                if (canMoveThere(newPosition))
                 {
                     this.position = newPosition;
                 }
             }
         }
+    }
+    private boolean canMoveThere(Vector2d position)
+    {
+        return position.getX() >= 0 && position.getX() <= 4 && position.getY() >= 0 && position.getY() <= 4;
     }
 
 }

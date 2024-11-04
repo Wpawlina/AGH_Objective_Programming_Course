@@ -29,40 +29,26 @@ public class SimulationIntegrationTest {
     }
 
     @Test
-    public void animalOrientation()
+    public void animalMovement()
     {
         Animal animal = new Animal();
-        String[] atributes = new String[]{"r", "l", "l", "l", "r"};
+        Animal animal2 = new Animal();
+        LinkedList<Animal> animals = new LinkedList<>();
+        animals.add(animal);
+        animals.add(animal2);
+        String[] atributes = new String[]{"f","b","f","b","f","b"};
         LinkedList<MoveDirection> moves = OptionsParser.parse(atributes);
+        int i=0;
         for (MoveDirection move: moves) {
-            animal.move(move);
+            animals.get(i).move(move);
+            i=(i+1)%2;
+
         }
-        assertEquals(animal.toString(), "position: (2,2), direction: Zachód");
+        assertEquals(animal.toString(), "position: (2,4), direction: Północ");
+        assertEquals(animal2.toString(),"position: (2,0), direction: Północ");
     }
 
-    @Test
-    public void animalPosition()
-    {
-        Animal animal = new Animal();
-        String[] atributes = new String[]{"f","l","b","l","f","r","b"};
-        LinkedList<MoveDirection> moves = OptionsParser.parse(atributes);
-        for (MoveDirection move: moves) {
-            animal.move(move);
-        }
-        assertEquals(animal.toString(), "position: (4,2), direction: Zachód");
-    }
 
-    @Test
-    public void mapLimit()
-    {
-        Animal animal = new Animal();
-        String[] atributes = new String[]{"f","f","f","r","f","f","f"};
-        LinkedList<MoveDirection> moves = OptionsParser.parse(atributes);
-        for (MoveDirection move : moves) {
-            animal.move(move);
-        }
-        assertEquals(animal.toString(), "position: (4,4), direction: Wschód");
-    }
 
 
 
