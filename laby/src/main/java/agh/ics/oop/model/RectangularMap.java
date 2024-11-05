@@ -45,7 +45,7 @@ public class RectangularMap implements WorldMap {
             throw new IllegalArgumentException("The animal is not on the map");
         }
         Vector2d oldPosition=animal.getPosition();
-        Animal.MapDirection oldDirection=animal.getDirection();
+        MapDirection oldDirection=animal.getDirection();
         switch (direction) {
             case RIGHT, LEFT -> animal.move(direction,this);
             case FORWARD -> {
