@@ -1,11 +1,12 @@
 package agh.ics.oop.model;
 
 import java.util.HashMap;
+import java.util.Vector;
 
 import agh.ics.oop.model.util.MapVisualizer;
 
 
-public class RectangularMap implements WorldMap {
+public class RectangularMap implements WorldMap<Animal, Vector2d> {
     private final HashMap<Vector2d,Animal> animals=new HashMap<>();
     private final int width;
     private final int height;
@@ -22,7 +23,7 @@ public class RectangularMap implements WorldMap {
         this.upperRight=new Vector2d(this.width,this.height);
 
     }
-
+    @Override
     public boolean place(Animal animal){
         if(this.canMoveTo(animal.getPosition()))
         {
@@ -37,7 +38,7 @@ public class RectangularMap implements WorldMap {
     }
 
 
-
+    @Override
     public void move(Animal animal, MoveDirection direction)
     {
         if(!this.animals.containsKey(animal.getPosition()))
@@ -64,11 +65,12 @@ public class RectangularMap implements WorldMap {
             }
         }
     }
+    @Override
     public boolean isOccupied(Vector2d position)
     {
         return this.animals.containsKey(position);
     }
-
+    @Override
     public Animal objectAt(Vector2d position)
     {
         return  this.animals.get(position);
@@ -81,12 +83,12 @@ public class RectangularMap implements WorldMap {
     {
         return position.getX() >= 0 && position.getX() <= this.width && position.getY() >= 0 && position.getY() <= this.height;
     }
-
+    @Override
     public boolean canMoveTo(Vector2d position)
     {
         return InTheMap(position) && !isOccupied(position);
     }
-
+    @Override
     public String toString()
     {
 
