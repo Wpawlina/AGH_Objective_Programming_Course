@@ -12,6 +12,7 @@ public class Animal {
     }
 
     public  Animal(Vector2d initialPosition){
+
         if(!inTheMap(initialPosition))
         {
             throw new IllegalArgumentException("Animal position is out of the map");
@@ -22,6 +23,7 @@ public class Animal {
 
     @Override
     public String toString() {
+
         return switch (this.direction)
         {
             case NORTH -> "^";
@@ -29,6 +31,7 @@ public class Animal {
             case SOUTH -> "v";
             case WEST -> "<";
         };
+
 
     }
     public boolean isAt(Vector2d position){
@@ -49,6 +52,7 @@ public class Animal {
             }
             case BACKWARD -> {
                 Vector2d newPosition = this.position.subtract(this.direction.toUnitVector());
+
                 if (validator.canMoveTo(newPosition))
                 {
                     this.position = newPosition;
@@ -74,47 +78,7 @@ public class Animal {
     {
         return position.getX() >= 0 && position.getX() <= 4 && position.getY() >= 0 && position.getY() <= 4;
     }
-
-    public enum MapDirection {
-        NORTH,
-        EAST,
-        SOUTH,
-        WEST;
-
-        public String toString(){
-            return switch (this)
-            {
-                case NORTH -> "Północ";
-                case EAST -> "Wschód";
-                case SOUTH-> "Południe";
-                case WEST->"Zachód";
-            };
-        }
-        public MapDirection next(){
-            return  switch (this){
-                case EAST -> SOUTH;
-                case SOUTH -> WEST;
-                case WEST-> NORTH;
-                case NORTH -> EAST;
-            };
-        }
-        public MapDirection previous()
-        {
-            return switch (this){
-                case EAST -> NORTH;
-                case NORTH -> WEST;
-                case WEST -> SOUTH;
-                case SOUTH -> EAST;
-            };
-        }
-        public  Vector2d toUnitVector(){
-            return  switch (this){
-                case NORTH -> new Vector2d(0,1);
-                case WEST -> new Vector2d(-1,0);
-                case EAST -> new Vector2d(1,0);
-                case SOUTH -> new Vector2d(0,-1);
-
-            };
-        }
-    }
+  
 }
+
+

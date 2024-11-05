@@ -1,6 +1,8 @@
 package agh.ics.oop.model;
 
+
 import agh.ics.oop.model.MoveDirection;
+
 import agh.ics.oop.OptionsParser;
 import org.junit.jupiter.api.Test;
 
