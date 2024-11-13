@@ -48,15 +48,8 @@ public class RectangularMap implements WorldMap {
         MapDirection oldDirection=animal.getDirection();
         switch (direction) {
             case RIGHT, LEFT -> animal.move(direction,this);
-            case FORWARD -> {
-                Vector2d newPosition = animal.getPosition().add(oldDirection.toUnitVector());
-                animal.move(direction, this);
-                this.animals.remove(oldPosition);
-                place(animal);
+            case FORWARD, BACKWARD -> {
 
-            }
-            case BACKWARD -> {
-                Vector2d newPosition = animal.getPosition().subtract(oldDirection.toUnitVector());
                 animal.move(direction, this);
                 this.animals.remove(oldPosition);
                 place(animal);
