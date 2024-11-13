@@ -54,7 +54,9 @@ public class Vector2dTest {
         Vector2d v1 = new Vector2d(1, 2);
         Vector2d v2 = new Vector2d(2, 3);
 
-        assertTrue(v2.followes(v1));
+
+        assertTrue(v2.follows(v1));
+
     }
 
     @Test
@@ -62,7 +64,8 @@ public class Vector2dTest {
         Vector2d v1 = new Vector2d(1, 2);
         Vector2d v2 = new Vector2d(0, 1);
 
-        assertFalse(v2.followes(v1));
+        assertFalse(v2.follows(v1));
+
     }
 
     @Test

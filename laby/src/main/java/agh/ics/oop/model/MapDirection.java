@@ -31,8 +31,10 @@ public enum MapDirection {
             case WEST -> SOUTH;
             case SOUTH -> EAST;
         };
-   }
-   public  Vector2d toUnitVector(){
+    }
+
+    public  Vector2d toUnitVector(){
+
         return  switch (this){
             case NORTH -> new Vector2d(0,1);
             case WEST -> new Vector2d(-1,0);
@@ -40,5 +42,6 @@ public enum MapDirection {
             case SOUTH -> new Vector2d(0,-1);
 
         };
-   }
+    }
 }
+

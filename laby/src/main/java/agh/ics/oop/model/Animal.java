@@ -1,6 +1,6 @@
 package agh.ics.oop.model;
 
-import agh.ics.oop.MoveDirection;
+
 
 public class Animal {
     private Vector2d position;
@@ -12,7 +12,8 @@ public class Animal {
     }
 
     public  Animal(Vector2d initialPosition){
-        if(!canMoveThere(initialPosition))
+
+        if(!inTheMap(initialPosition))
         {
             throw new IllegalArgumentException("Animal position is out of the map");
         }
@@ -22,12 +23,21 @@ public class Animal {
 
     @Override
     public String toString() {
-        return "position: " + position + ", direction: " + direction;
+
+        return switch (this.direction)
+        {
+            case NORTH -> "^";
+            case EAST -> ">";
+            case SOUTH -> "v";
+            case WEST -> "<";
+        };
+
+
     }
     public boolean isAt(Vector2d position){
         return this.position.equals(position);
     }
-    public void move(MoveDirection direction)
+    public void move(MoveDirection direction, MoveValidator validator)
     {
         switch (direction)
         {
@@ -35,23 +45,40 @@ public class Animal {
             case LEFT -> this.direction = this.direction.previous();
             case FORWARD -> {
                 Vector2d newPosition = this.position.add(this.direction.toUnitVector());
-                if (canMoveThere(newPosition))
+                if (validator.canMoveTo(newPosition))
                 {
                     this.position = newPosition;
                 }
             }
             case BACKWARD -> {
                 Vector2d newPosition = this.position.subtract(this.direction.toUnitVector());
-                if (canMoveThere(newPosition))
+
+                if (validator.canMoveTo(newPosition))
                 {
                     this.position = newPosition;
                 }
             }
         }
     }
-    private boolean canMoveThere(Vector2d position)
+
+    public Vector2d getPosition() {
+        return this.position;
+    }
+
+    public MapDirection getDirection() {
+        return this.direction;
+    }
+
+
+
+
+
+
+    private boolean inTheMap(Vector2d position)
     {
         return position.getX() >= 0 && position.getX() <= 4 && position.getY() >= 0 && position.getY() <= 4;
     }
-
+  
 }
+
+

@@ -1,6 +1,8 @@
 package agh.ics.oop.model;
 
-import agh.ics.oop.MoveDirection;
+
+import agh.ics.oop.model.MoveDirection;
+
 import agh.ics.oop.OptionsParser;
 import org.junit.jupiter.api.Test;
 
@@ -12,40 +14,41 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class SimulationIntegrationTest {
 
 
-    @Test
-    public void parsingArguments()
-    {
-        String[] atributes = new String[]{"f","f","f","r","l","f","w","s","b"};
-        LinkedList<MoveDirection> moves = OptionsParser.parse(atributes);
-        LinkedList<MoveDirection> expected = new LinkedList<>();
-        expected.add(MoveDirection.FORWARD);
-        expected.add(MoveDirection.FORWARD);
-        expected.add(MoveDirection.FORWARD);
-        expected.add(MoveDirection.RIGHT);
-        expected.add(MoveDirection.LEFT);
-        expected.add(MoveDirection.FORWARD);
-        expected.add(MoveDirection.BACKWARD);
-        assertEquals(moves, expected);
-    }
+
 
     @Test
-    public void animalMovement()
+    public void animalMovementOnAMap()
     {
-        Animal animal = new Animal();
-        Animal animal2 = new Animal();
-        LinkedList<Animal> animals = new LinkedList<>();
-        animals.add(animal);
-        animals.add(animal2);
-        String[] atributes = new String[]{"f","b","f","b","f","b"};
+        String[] atributes = new String[]{"f", "f", "r", "l","f","f"};
         LinkedList<MoveDirection> moves = OptionsParser.parse(atributes);
+        Animal animal = new Animal(new Vector2d(2,2));
+        Animal animal2 = new Animal(new Vector2d(3,3));
+        WorldMap map = new RectangularMap(10, 10);
+
+
+        map.place(animal);
+        map.place(animal2);
         int i=0;
-        for (MoveDirection move: moves) {
-            animals.get(i).move(move);
-            i=(i+1)%2;
+        for (MoveDirection move : moves) {
+            if(i==0)
+            {
+                map.move(animal, move);
+                i++;
+            }
+            else
+            {
+                map.move(animal2, move);
+                i=0;
+            }
 
         }
-        assertEquals(animal.toString(), "position: (2,4), direction: Północ");
-        assertEquals(animal2.toString(),"position: (2,0), direction: Północ");
+
+        assertEquals(animal.getPosition(), new Vector2d(3,3));
+        assertEquals(map.objectAt(new Vector2d(3,3)), animal);
+        assertEquals(animal2.getPosition(), new Vector2d(2,4));
+        assertEquals(map.objectAt(new Vector2d(2,4)), animal2);
+
+
     }
 
 

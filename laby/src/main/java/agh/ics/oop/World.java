@@ -1,10 +1,9 @@
 package agh.ics.oop;
 
 
-import agh.ics.oop.model.Animal;
-import agh.ics.oop.model.MapDirection;
-import agh.ics.oop.model.Simulation;
-import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.*;
+import agh.ics.oop.model.MoveDirection;
+
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -18,8 +17,11 @@ public class World {
 
         LinkedList<MoveDirection> directions = OptionsParser.parse(args);
         LinkedList<Vector2d> positions =new  LinkedList<Vector2d>(Arrays.asList(new Vector2d(2,2), new Vector2d(3,4)));
-        Simulation simulation = new Simulation(positions, directions);
+
+        Simulation simulation = new Simulation(positions, directions, new RectangularMap(10, 5));
+
         simulation.run();
+
 
 
 
