@@ -17,8 +17,10 @@ public class World {
 
         LinkedList<MoveDirection> directions = OptionsParser.parse(args);
         LinkedList<Vector2d> positions =new  LinkedList<Vector2d>(Arrays.asList(new Vector2d(2,2), new Vector2d(3,4)));
+        WorldMap map = new GrassField(10);
 
-        Simulation simulation = new Simulation(positions, directions, new RectangularMap(10, 5));
+
+        Simulation simulation = new Simulation(positions, directions, map);
 
         simulation.run();
 

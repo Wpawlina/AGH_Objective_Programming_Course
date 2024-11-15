@@ -17,7 +17,7 @@ public class SimulationIntegrationTest {
 
 
     @Test
-    public void animalMovementOnAMap()
+    public void animalMovementOnARectangularMap()
     {
         String[] atributes = new String[]{"f", "f", "r", "l","f","f"};
         LinkedList<MoveDirection> moves = OptionsParser.parse(atributes);
@@ -47,8 +47,6 @@ public class SimulationIntegrationTest {
         assertEquals(map.objectAt(new Vector2d(3,3)), animal);
         assertEquals(animal2.getPosition(), new Vector2d(2,4));
         assertEquals(map.objectAt(new Vector2d(2,4)), animal2);
-
-
     }
 
 
