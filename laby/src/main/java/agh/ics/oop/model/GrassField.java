@@ -26,6 +26,7 @@ public class GrassField  extends  AbstractWorldMap{
                 this.grass.put(position,grass1);
             }
         }
+        this.boundery=new Boundery(this.lowerLeft(),this.upperRight());
     }
 
     @Override
@@ -56,11 +57,16 @@ public class GrassField  extends  AbstractWorldMap{
 
 
 
-    @Override
-    public String toString() {
-        return this.mapVisualizer.draw(this.lowerLeft(), this.upperRight());
 
+
+    @Override
+    public Boundery  getCurrentBoundery()
+    {
+        this.boundery=new Boundery(this.lowerLeft(),this.upperRight());
+        return this.boundery;
     }
+
+
 
 
 
