@@ -2,7 +2,7 @@ package agh.ics.oop.model;
 
 
 
-public class Animal {
+public class Animal implements WorldElement {
     private Vector2d position;
     private MapDirection direction;
 
@@ -12,11 +12,6 @@ public class Animal {
     }
 
     public  Animal(Vector2d initialPosition){
-
-        if(!inTheMap(initialPosition))
-        {
-            throw new IllegalArgumentException("Animal position is out of the map");
-        }
         this.position = initialPosition;
         this.direction = MapDirection.NORTH;
     }
@@ -74,10 +69,7 @@ public class Animal {
 
 
 
-    private boolean inTheMap(Vector2d position)
-    {
-        return position.getX() >= 0 && position.getX() <= 4 && position.getY() >= 0 && position.getY() <= 4;
-    }
+
   
 }
 

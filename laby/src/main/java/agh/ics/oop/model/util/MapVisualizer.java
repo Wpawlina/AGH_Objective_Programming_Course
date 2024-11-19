@@ -79,9 +79,7 @@ public class MapVisualizer {
         if (this.map.isOccupied(currentPosition)) {
             Object object = this.map.objectAt(currentPosition);
             if (object != null) {
-
                 return object.toString();
-
             }
 
         }
