@@ -25,9 +25,16 @@ public class SimulationIntegrationTest {
         Animal animal2 = new Animal(new Vector2d(3,3));
         WorldMap map = new RectangularMap(10, 10);
 
+        try {
+            map.place(animal);
+            map.place(animal2);
+        }
+        catch (IncorrectPositionException e)
+        {
+            assert  false;
+        }
 
-        map.place(animal);
-        map.place(animal2);
+
         int i=0;
         for (MoveDirection move : moves) {
             if(i==0)

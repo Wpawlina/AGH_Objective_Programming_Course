@@ -8,16 +8,14 @@ import agh.ics.oop.model.util.MapVisualizer;
 public class RectangularMap extends  AbstractWorldMap {
     private final int width;
     private final int height;
-    private final Vector2d lowerLeft;
-    private final Vector2d upperRight;
+
 
     public  RectangularMap(int width, int height)
     {
         super();
         this.width=width;
         this.height=height;
-        this.lowerLeft=new Vector2d(0,0);
-        this.upperRight=new Vector2d(this.width,this.height);
+        this.boundery=new Boundery(new Vector2d(0,0),new Vector2d(width,height));
 
     }
 
@@ -43,10 +41,12 @@ public class RectangularMap extends  AbstractWorldMap {
         return InTheMap(position) && super.canMoveTo(position);
     }
 
+
+
     @Override
-    public String toString()
-    {
-        return this.mapVisualizer.draw(this.lowerLeft, this.upperRight);
+    public Boundery getCurrentBoundery(){
+        return this.boundery;
+
     }
 
 

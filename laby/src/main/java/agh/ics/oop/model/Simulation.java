@@ -23,15 +23,18 @@ public class Simulation {
         for (int i=0; i<n; i++) {
 
             Animal animal = new Animal(this.initialAnimalsPositions.get(i));
-            if(!map.place(animal)) {
-                throw new IllegalArgumentException("The position is already occupied or out of the map");
+            try{
+                map.place(animal);
+            }
+            catch (IncorrectPositionException e)
+            {
+                continue;
             }
             animals.add(animal);
         }
         int i=0;
         for (MoveDirection move: this.moves) {
             map.move(animals.get(i), move);
-            System.out.println(map);
 
             i = (i+1)%n;
         }

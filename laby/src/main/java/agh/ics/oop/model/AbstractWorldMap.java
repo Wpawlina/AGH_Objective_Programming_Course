@@ -6,24 +6,29 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static java.lang.System.exit;
+
 abstract  public class AbstractWorldMap implements WorldMap {
     final protected MapVisualizer mapVisualizer;
     final protected   HashMap<Vector2d,Animal> animals=new HashMap<>();
+    final protected ArrayList<MapChangeListener> observers=new ArrayList<>();
+    protected Boundery boundery;
 
     public AbstractWorldMap() {
         this.mapVisualizer = new MapVisualizer(this);
     }
 
-    public boolean place(Animal animal){
+    public void place(Animal animal) throws IncorrectPositionException {
         if(this.canMoveTo(animal.getPosition()))
         {
             this.animals.put(animal.getPosition(),animal);
-            return true;
+
         }
         else
         {
-            throw new IllegalArgumentException("The position is already occupied or out of the map");
+            throw new IncorrectPositionException(animal.getPosition());
         }
+        this.notifyObservers("An animal has been placed at "+animal.getPosition().toString());
 
     }
 
@@ -34,14 +39,29 @@ abstract  public class AbstractWorldMap implements WorldMap {
         {
             throw new IllegalArgumentException("The animal is not on the map");
         }
+
         Vector2d oldPosition=animal.getPosition();
         MapDirection oldDirection=animal.getDirection();
         switch (direction) {
-            case RIGHT, LEFT -> animal.move(direction,this);
+            case RIGHT, LEFT ->{
+                animal.move(direction,this);
+                this.notifyObservers("An animal has changed direction from "+oldDirection.toString()+" to "+animal.getDirection().toString());
+
+            }
             case FORWARD, BACKWARD -> {
                 animal.move(direction, this);
                 this.animals.remove(oldPosition);
-                place(animal);
+                try
+                {
+                    place(animal);
+                }
+                catch (IncorrectPositionException e)
+                {
+                    System.out.println(e.getMessage());
+                    exit(1);
+                }
+                this.notifyObservers("An animal has moved from "+oldPosition.toString()+" to "+animal.getPosition().toString());
+
             }
         }
     }
@@ -67,6 +87,33 @@ abstract  public class AbstractWorldMap implements WorldMap {
     {
         List<WorldElement> elements = new ArrayList<>(this.animals.values());
         return elements;
+    }
+
+    abstract public Boundery getCurrentBoundery();
+
+
+    @Override
+    public String toString()
+    {
+        return this.mapVisualizer.draw(this.getCurrentBoundery().lowerLeft(),this.getCurrentBoundery().upperRight());
+    }
+
+    public void registerObserver(MapChangeListener observer)
+    {
+        this.observers.add(observer);
+    }
+
+    public  void romoveObserver(MapChangeListener observer)
+    {
+        this.observers.remove(observer);
+    }
+
+    protected void notifyObservers(String message)
+    {
+        for(MapChangeListener observer:observers)
+        {
+            observer.mapChanged(this,message);
+        }
     }
 
 }

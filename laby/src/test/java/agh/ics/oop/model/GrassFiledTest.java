@@ -13,7 +13,15 @@ public class GrassFiledTest {
         GrassField map = new GrassField(4);
         Vector2d position = new Vector2d(10, 10);
         Animal animal = new Animal(position);
-        map.place(animal);
+        try{
+            map.place(animal);
+
+        }
+        catch (IncorrectPositionException e)
+        {
+            assert false;
+        }
+
         assert(map.isOccupied(position));
     }
     @Test
@@ -21,9 +29,16 @@ public class GrassFiledTest {
         GrassField map = new GrassField(1);
         Vector2d position = new Vector2d(5, 5);
         Animal animal = new Animal(position);
-        map.place(animal);
+        try {
+            map.place(animal);
+        }
+        catch (IncorrectPositionException e)
+        {
+            assert false;
+        }
+
         Animal anotherAnimal = new Animal(position);
-        assertThrows(IllegalArgumentException.class, () -> map.place(anotherAnimal));
+        assertThrows(IncorrectPositionException.class, () -> map.place(anotherAnimal));
     }
 
     @Test
@@ -50,7 +65,14 @@ public class GrassFiledTest {
         GrassField map = new GrassField(4);
         Vector2d position = new Vector2d(10, 10);
         Animal animal = new Animal(position);
-        map.place(animal);
+        try {
+            map.place(animal);
+        }
+        catch (IncorrectPositionException e)
+        {
+            assert false;
+        }
+
         assertEquals(animal, map.objectAt(position));
     }
 
@@ -60,7 +82,14 @@ public class GrassFiledTest {
         GrassField map = new GrassField(1);
         Vector2d position = new Vector2d(20, 20);
         Animal animal = new Animal(position);
-        map.place(animal);
+        try{
+            map.place(animal);
+        }
+        catch (IncorrectPositionException e)
+        {
+            assert false;
+        }
+
         map.move(animal, MoveDirection.FORWARD);
         assertEquals(new Vector2d(20, 21), animal.getPosition());
         map.move(animal, MoveDirection.RIGHT);
@@ -79,7 +108,14 @@ public class GrassFiledTest {
         GrassField map = new GrassField(4);
         Vector2d position = new Vector2d(10, 10);
         Animal animal = new Animal(position);
-        map.place(animal);
+        try {
+            map.place(animal);
+        }
+        catch (IncorrectPositionException e)
+        {
+            assert false;
+        }
+
         List<WorldElement> elements=map.getElements();
         assertEquals(animal,elements.getFirst()) ;
         assertEquals(5, elements.size());
