@@ -5,16 +5,12 @@ import agh.ics.oop.model.*;
 import agh.ics.oop.model.MoveDirection;
 
 
-import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.*;
 
 import static java.lang.System.exit;
 
 public class World {
     public static void main(String[] args) {
-        Animal animal1 = new Animal();
-
-        Animal animal2 = new Animal(new Vector2d(1,2));
 
         LinkedList<MoveDirection> directions= new LinkedList<>();
         try
@@ -27,14 +23,45 @@ public class World {
             exit(1);
         }
 
-        LinkedList<Vector2d> positions =new  LinkedList<Vector2d>(Arrays.asList(new Vector2d(2,2), new Vector2d(3,4)));
-        AbstractWorldMap map = new GrassField(10);
-        map.registerObserver(new ConsoleMapDisplay());
+        LinkedList<Vector2d> positions =new  LinkedList<Vector2d>(Arrays.asList(new Vector2d(12,12), new Vector2d(15,16)));
+        ArrayList<AbstractWorldMap> maps=new ArrayList<>();
+        for(int i=0;i<1000;i++)
+        {
+            maps.add(new RectangularMap(20,20));
+        }
+        for(int i=0;i<1000;i++)
+        {
+            maps.add(new GrassField(1));
+        }
 
 
-        Simulation simulation = new Simulation(positions, directions, map);
 
-        simulation.run();
+        ConsoleMapDisplay displayer= new ConsoleMapDisplay();
+        for (AbstractWorldMap map : maps) {
+            map.registerObserver(displayer);
+
+        }
+
+
+        ArrayList<Simulation> simulations =new ArrayList<>();
+        for (AbstractWorldMap map : maps) {
+            simulations.add(new Simulation(positions,directions,map));
+
+        }
+        SimulationEngine simulationEngine = new SimulationEngine(simulations);
+
+       // simulationEngine.runSync();
+        try{
+            //simulationEngine.runAsync();
+            simulationEngine.runAsyncInThreadPool();
+
+        }
+        catch (InterruptedException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("system zakoczył działanie");
 
 
 

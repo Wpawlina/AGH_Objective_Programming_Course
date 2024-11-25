@@ -44,7 +44,7 @@ public class RectangularMap extends  AbstractWorldMap {
 
 
     @Override
-    public Boundery getCurrentBoundery(){
+    public Boundery getCurrentBounds(){
         return this.boundery;
 
     }

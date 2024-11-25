@@ -5,6 +5,7 @@ import agh.ics.oop.model.util.MapVisualizer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import static java.lang.System.exit;
 
@@ -13,15 +14,19 @@ abstract  public class AbstractWorldMap implements WorldMap {
     final protected   HashMap<Vector2d,Animal> animals=new HashMap<>();
     final protected ArrayList<MapChangeListener> observers=new ArrayList<>();
     protected Boundery boundery;
+    protected UUID mapId;
 
     public AbstractWorldMap() {
+
         this.mapVisualizer = new MapVisualizer(this);
+        this.mapId=UUID.randomUUID();
     }
 
     public void place(Animal animal) throws IncorrectPositionException {
         if(this.canMoveTo(animal.getPosition()))
         {
             this.animals.put(animal.getPosition(),animal);
+
 
         }
         else
@@ -89,13 +94,13 @@ abstract  public class AbstractWorldMap implements WorldMap {
         return elements;
     }
 
-    abstract public Boundery getCurrentBoundery();
+    abstract public Boundery getCurrentBounds();
 
 
     @Override
     public String toString()
     {
-        return this.mapVisualizer.draw(this.getCurrentBoundery().lowerLeft(),this.getCurrentBoundery().upperRight());
+        return this.mapVisualizer.draw(this.getCurrentBounds().lowerLeft(),this.getCurrentBounds().upperRight());
     }
 
     public void registerObserver(MapChangeListener observer)
@@ -114,6 +119,11 @@ abstract  public class AbstractWorldMap implements WorldMap {
         {
             observer.mapChanged(this,message);
         }
+    }
+
+    @Override
+    public  UUID getId(){
+        return  this.mapId;
     }
 
 }

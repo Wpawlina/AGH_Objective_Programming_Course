@@ -1,9 +1,11 @@
-package agh.ics.oop.model;
+package agh.ics.oop;
 
+
+import agh.ics.oop.model.*;
 
 import java.util.LinkedList;
 
-public class Simulation {
+public class Simulation implements Runnable {
     private final LinkedList<Vector2d> initialAnimalsPositions;
     private final LinkedList<MoveDirection> moves;
 
@@ -17,7 +19,7 @@ public class Simulation {
 
 
     }
-    public void run() {
+    public  void run() {
         int n = this.initialAnimalsPositions.size();
         LinkedList<Animal> animals = new LinkedList<>();
         for (int i=0; i<n; i++) {
@@ -32,10 +34,10 @@ public class Simulation {
             }
             animals.add(animal);
         }
+        n=animals.size();
         int i=0;
         for (MoveDirection move: this.moves) {
             map.move(animals.get(i), move);
-
             i = (i+1)%n;
         }
 
