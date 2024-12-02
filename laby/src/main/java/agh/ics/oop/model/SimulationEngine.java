@@ -57,7 +57,11 @@ public class SimulationEngine {
             thread.join();
         }
         executor.shutdown();
-        executor.awaitTermination(10, TimeUnit.SECONDS);
+       if(!executor.awaitTermination(10, TimeUnit.SECONDS))
+       {
+           executor.shutdownNow();
+
+       }
 
 
     }

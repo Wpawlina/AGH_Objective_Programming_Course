@@ -52,7 +52,7 @@ public class World {
 
        // simulationEngine.runSync();
         try{
-            //simulationEngine.runAsync();
+          //  simulationEngine.runAsync();
             simulationEngine.runAsyncInThreadPool();
 
         }
