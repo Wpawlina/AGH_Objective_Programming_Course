@@ -60,7 +60,7 @@ public class GrassField  extends  AbstractWorldMap{
 
 
     @Override
-    public Boundery  getCurrentBoundery()
+    public Boundery getCurrentBounds()
     {
         this.boundery=new Boundery(this.lowerLeft(),this.upperRight());
         return this.boundery;
