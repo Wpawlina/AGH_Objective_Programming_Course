@@ -51,4 +51,6 @@ public interface WorldMap extends MoveValidator {
 
     UUID getId();
 
+    public  void registerObserver(MapChangeListener observer);
+
 }
