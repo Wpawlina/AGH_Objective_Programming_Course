@@ -7,6 +7,8 @@ import agh.ics.oop.model.util.RandomWithoutRepeatingIterator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 public class GrassField  extends  AbstractWorldMap{
 
@@ -39,18 +41,20 @@ public class GrassField  extends  AbstractWorldMap{
 
 
     @Override
-    public WorldElement objectAt(Vector2d position)
+    public Optional<WorldElement> objectAt(Vector2d position)
     {
-        return super.objectAt(position)!=null?super.objectAt(position):this.grass.get(position);
+//        return super.objectAt(position)!=null?super.objectAt(position):this.grass.get(position);
+        return  Optional.ofNullable(super.objectAt(position).orElse(this.grass.get(position)));
 
     }
 
     @Override
     public List<WorldElement> getElements()
     {
-        List<WorldElement> elements=super.getElements();
-        elements.addAll(this.grass.values());
-        return elements;
+//        List<WorldElement> elements=super.getElements();
+//        elements.addAll(this.grass.values());
+//        return elements;
+       return new ArrayList<WorldElement> ( Stream.concat(super.getElements().stream(),this.grass.values().stream()).toList());
 
     }
 

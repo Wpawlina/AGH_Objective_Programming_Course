@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GrassFiledTest {
     @Test
@@ -53,7 +52,7 @@ public class GrassFiledTest {
 
                 if (map.isOccupied(position)) {
                     Animal animal = new Animal(position);
-                    assertThrows(IllegalArgumentException.class, () -> map.place(animal));
+                    assertThrows(IncorrectPositionException.class, () -> map.place(animal));
                 }
 
             }
@@ -73,7 +72,8 @@ public class GrassFiledTest {
             assert false;
         }
 
-        assertEquals(animal, map.objectAt(position));
+        assertTrue(map.objectAt(position).isPresent());
+        assertEquals(map.objectAt(position).get(), animal);
     }
 
 

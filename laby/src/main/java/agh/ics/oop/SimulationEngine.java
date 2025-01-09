@@ -1,8 +1,5 @@
-package agh.ics.oop.model;
+package agh.ics.oop;
 
-import agh.ics.oop.Simulation;
-
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 
 import java.util.ArrayList;

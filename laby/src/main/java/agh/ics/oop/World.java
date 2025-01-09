@@ -3,16 +3,20 @@ package agh.ics.oop;
 
 import agh.ics.oop.model.*;
 import agh.ics.oop.model.MoveDirection;
+import javafx.application.Application;
+
+import  java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
-import java.util.*;
 
 import static java.lang.System.exit;
 
 public class World {
     public static void main(String[] args) {
 
-        LinkedList<MoveDirection> directions= new LinkedList<>();
+      /*  LinkedList<MoveDirection> directions= new LinkedList<>();
         try
         {
              directions = OptionsParser.parse(args);
@@ -61,7 +65,9 @@ public class World {
             System.out.println(e.getMessage());
         }
 
-        System.out.println("system zakoczył działanie");
+        System.out.println("system zakoczył działanie");*/
+
+        Application.launch(SimulationApp.class,args);
 
 
 

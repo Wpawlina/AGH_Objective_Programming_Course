@@ -26,7 +26,7 @@ public class OptionParserTest {
     @Test
     public void parseIncorrect() {
         String[] atributes = new String[]{"f", "b", "l", "r","wrong"};
-        assertThrows(IncorrectPositionException.class, () -> OptionsParser.parse(atributes));
+        assertThrows(IllegalArgumentException.class, () -> OptionsParser.parse(atributes));
     }
 }
 

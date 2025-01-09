@@ -64,13 +64,24 @@ public class Animal implements WorldElement {
         return this.direction;
     }
 
+    @Override
+    public String imageFilePath() {
+        return switch (this.direction)
+        {
+            case NORTH -> "/up.png";
+            case EAST -> "/right.png";
+            case SOUTH -> "/down.png";
+            case WEST -> "/left.png";
+        };
+    }
 
 
 
 
 
 
-  
+
+
 }
 
 
