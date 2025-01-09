@@ -1,9 +1,9 @@
 package agh.ics.oop.model;
 
-import java.util.concurrent.atomic.AtomicInteger;
 
-public class ConsoleMapDisplay implements MapChangeListener{
+public class ConsoleMapDisplay implements MapChangeListener {
     private  int messageCounter = 0;
+    
     @Override
     public synchronized   void mapChanged(WorldMap map, String message) {
             System.out.println(message);
@@ -12,11 +12,6 @@ public class ConsoleMapDisplay implements MapChangeListener{
             System.out.println(map);
             this.messageCounter++;
             System.out.println("Received messages:"+messageCounter+".");
-
-
-
-
-
 
     }
 }

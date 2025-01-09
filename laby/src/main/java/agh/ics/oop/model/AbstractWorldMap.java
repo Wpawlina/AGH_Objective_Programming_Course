@@ -1,5 +1,8 @@
 package agh.ics.oop.model;
 
+
+
+
 import agh.ics.oop.model.util.MapVisualizer;
 
 import java.util.ArrayList;
@@ -90,8 +93,7 @@ abstract  public class AbstractWorldMap implements WorldMap {
 
     public List<WorldElement> getElements()
     {
-        List<WorldElement> elements = new ArrayList<>(this.animals.values());
-        return elements;
+        return new ArrayList<>(this.animals.values());
     }
 
     abstract public Boundery getCurrentBounds();
@@ -102,7 +104,7 @@ abstract  public class AbstractWorldMap implements WorldMap {
     {
         return this.mapVisualizer.draw(this.getCurrentBounds().lowerLeft(),this.getCurrentBounds().upperRight());
     }
-
+    @Override
     public void registerObserver(MapChangeListener observer)
     {
         this.observers.add(observer);
@@ -117,8 +119,10 @@ abstract  public class AbstractWorldMap implements WorldMap {
     {
         for(MapChangeListener observer:observers)
         {
-            observer.mapChanged(this,message);
+           observer.mapChanged(this,message);
+
         }
+
     }
 
     @Override
