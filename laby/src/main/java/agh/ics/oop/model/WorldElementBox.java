@@ -20,8 +20,8 @@ public class WorldElementBox {
         ImageView imageView = new ImageView(imagePath);
 
 
-        imageView.setFitWidth(30);
-        imageView.setFitHeight(30);
+        imageView.setFitWidth(25);
+        imageView.setFitHeight(25);
 
 
         Label label = new Label(labelText);

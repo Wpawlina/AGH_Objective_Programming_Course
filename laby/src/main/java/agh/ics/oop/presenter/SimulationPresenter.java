@@ -27,7 +27,7 @@ import java.util.List;
 public class SimulationPresenter implements MapChangeListener {
 
     private static final int CELL_WIDTH = 60;
-    private static final int CELL_HEIGHT = 60;
+    private static final int CELL_HEIGHT =60;
     @FXML
     private GridPane gridPane;
     @FXML
