@@ -1,9 +1,6 @@
 package agh.ics.oop;
 
-import agh.ics.oop.model.GrassField;
-import agh.ics.oop.model.MoveDirection;
-import agh.ics.oop.model.Vector2d;
-import agh.ics.oop.model.WorldMap;
+import agh.ics.oop.model.*;
 import agh.ics.oop.presenter.SimulationPresenter;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +9,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,8 +28,17 @@ public class SimulationApp extends Application {
             configureStage(primaryStage, viewRoot);
             primaryStage.show();
 
-            this.map=new GrassField(10);
+            this.map=new GrassField(5);
             map.registerObserver(presenter);
+            map.registerObserver((WorldMap map, String message)->
+                    {
+                        LocalDateTime CurDateTime = LocalDateTime.now();
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                        String formattedDateTime = CurDateTime.format(formatter);
+                        System.out.println(formattedDateTime+" "+message);
+                    }
+            );
+            map.registerObserver(new FileMapDisplay());
             presenter.setWorldMap(map);
 
 

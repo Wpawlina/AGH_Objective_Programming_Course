@@ -5,10 +5,9 @@ package agh.ics.oop.model;
 
 import agh.ics.oop.model.util.MapVisualizer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.lang.System.exit;
 
@@ -74,9 +73,9 @@ abstract  public class AbstractWorldMap implements WorldMap {
         }
     }
 
-    public WorldElement objectAt(Vector2d position)
+    public Optional<WorldElement> objectAt(Vector2d position)
     {
-        return  this.animals.get(position);
+        return  Optional.ofNullable(this.animals.get(position));
     }
 
     public boolean canMoveTo(Vector2d position)
@@ -128,6 +127,17 @@ abstract  public class AbstractWorldMap implements WorldMap {
     @Override
     public  UUID getId(){
         return  this.mapId;
+    }
+
+    @Override
+    public ArrayList<Animal> getOrderedAnimals()
+    {
+//        ArrayList<Map.Entry<Vector2d,Animal>> animals=new ArrayList<>(this.animals.entrySet());
+//        Collections.sort(animals,Comparator.comparing((Map.Entry<Vector2d,Animal> entry)->entry.getKey().getX()).thenComparing(entry->entry.getKey().getY()));
+//        return new  ArrayList<Animal>(animals.stream().map(Map.Entry::getValue).toList());
+
+       return  new ArrayList<Animal> (this.animals.entrySet().stream().sorted(Comparator.comparing((Map.Entry<Vector2d,Animal> entry)->entry.getKey().getX()).thenComparing(entry->entry.getKey().getY())).map(Map.Entry::getValue).toList());
+
     }
 
 }

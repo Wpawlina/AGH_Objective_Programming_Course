@@ -24,3 +24,4 @@ javafx {
 test {
     useJUnitPlatform()
 }
+

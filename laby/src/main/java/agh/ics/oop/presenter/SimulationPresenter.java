@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,8 +26,8 @@ import java.util.List;
 
 public class SimulationPresenter implements MapChangeListener {
 
-    private static final int CELL_WIDTH = 40;
-    private static final int CELL_HEIGHT = 30;
+    private static final int CELL_WIDTH = 60;
+    private static final int CELL_HEIGHT =60;
     @FXML
     private GridPane gridPane;
     @FXML
@@ -173,11 +174,8 @@ public class SimulationPresenter implements MapChangeListener {
 
     @FXML
     private void drawElement(WorldElement element,Boundery boundery){
-        Label label = new Label(element.toString());
-        label.setMinHeight(CELL_HEIGHT);
-        label.setMinWidth(CELL_WIDTH);
-        label.setAlignment(Pos.CENTER);
-        this.gridPane.add(label, element.getPosition().getX() - boundery.lowerLeft().getX()+1, boundery.upperRight().getY() - element.getPosition().getY()+1);
+        VBox vbox = new WorldElementBox(element.imageFilePath(),element.getPosition().toString()).getVBox();
+        this.gridPane.add(vbox, element.getPosition().getX() - boundery.lowerLeft().getX()+1, boundery.upperRight().getY() - element.getPosition().getY()+1);
     }
 
 

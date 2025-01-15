@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.LinkedList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class SimulationIntegrationTest {
@@ -51,9 +52,11 @@ public class SimulationIntegrationTest {
         }
 
         assertEquals(animal.getPosition(), new Vector2d(3,3));
-        assertEquals(map.objectAt(new Vector2d(3,3)), animal);
+        assertTrue(map.objectAt(new Vector2d(3,3)).isPresent());
+        assertEquals(map.objectAt(new Vector2d(3,3)).get(), animal);
         assertEquals(animal2.getPosition(), new Vector2d(2,4));
-        assertEquals(map.objectAt(new Vector2d(2,4)), animal2);
+        assertTrue(map.objectAt(new Vector2d(2,4)).isPresent());
+        assertEquals(map.objectAt(new Vector2d(2,4)).get(), animal2);
     }
 
 

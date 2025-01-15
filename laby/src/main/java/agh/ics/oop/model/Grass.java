@@ -15,6 +15,11 @@ public class Grass implements WorldElement {
     public String toString() {
         return "*";
     }
+
+    @Override
+    public String imageFilePath() {
+        return "/grass.png";
+    }
 }
 
 

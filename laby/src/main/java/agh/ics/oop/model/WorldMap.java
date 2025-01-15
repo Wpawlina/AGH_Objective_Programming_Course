@@ -2,8 +2,7 @@ package agh.ics.oop.model;
 
 
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * The interface responsible for interacting with the map of the world.
@@ -43,7 +42,7 @@ public interface WorldMap extends MoveValidator {
      * @param position The position of the animal.
      * @return animal or null if the position is not occupied.
      */
-    WorldElement objectAt(Vector2d position);
+   Optional<WorldElement> objectAt(Vector2d position);
 
     List<WorldElement> getElements();
 
@@ -52,5 +51,7 @@ public interface WorldMap extends MoveValidator {
     UUID getId();
 
     public  void registerObserver(MapChangeListener observer);
+
+    public ArrayList<Animal> getOrderedAnimals();
 
 }
