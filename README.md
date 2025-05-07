@@ -1,5 +1,4 @@
-Wojciech Pawlina 
-gr 15  pon 16 45
-Betoniarz
-https://gitexercises.fracz.com/committer/f1b9ec3c264589886c881f3278c6b6574437c3a8?fbclid=IwY2xjawFxvpNleHRuA2FlbQIxMAABHa2M95GH9qVqJOP1Za63x01M8VhyJOZw39njcrTVX1vmC98gUzAAMJwVOg_aem_RJxiVkxaXZoNk-PzS-nj6Q
-
+AGH UST Course of Objective Programming 
+================================================
+This repository contains the materials for the course of Objective Programming at the AGH University of Science and Technology.
+Exercises solved during the course. This course is also a tutorial of programing in Java and Kotlin.
